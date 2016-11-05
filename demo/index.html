@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+</head>
+<body>
+    <div id="form"></div>
+    <script src="form.min.js"></script>
+    <script>
+        var node = document.getElementById('form');
+        var app = Elm.Main.embed(node, {
+            account : "1234567890",
+            defaultSum : "1000",
+            defaultTarget : "Оплата публикации объявления",
+            successURL : "http://mail.ru"
+        });
+    </script>
+</body>
+</html>
