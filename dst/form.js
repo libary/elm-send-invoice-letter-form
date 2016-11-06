@@ -8306,13 +8306,13 @@ var _krisajenkins$elm_exts$Exts_Html$matchText = F3(
 			_krisajenkins$elm_exts$Exts_List$rest(allSegmentBoundaries));
 	});
 
-var _user$project$Type$Flags = F4(
-	function (a, b, c, d) {
-		return {account: a, defaultSum: b, defaultTarget: c, successURL: d};
+var _user$project$Type$Flags = F5(
+	function (a, b, c, d, e) {
+		return {account: a, email: b, sum: c, target: d, successURL: e};
 	});
-var _user$project$Type$Model = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {account: a, sum: b, target: c, url: d, errorOnSum: e, errorOnTarget: f, errorOnUrl: g, complete: h};
+var _user$project$Type$Model = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {account: a, email: b, sum: c, target: d, url: e, errorOnSum: f, errorOnTarget: g, errorOnUrl: h, complete: i};
 	});
 var _user$project$Type$SendComplete = {ctor: 'SendComplete'};
 var _user$project$Type$SendInit = {ctor: 'SendInit'};
@@ -8324,6 +8324,9 @@ var _user$project$Type$ChangeTarget = function (a) {
 };
 var _user$project$Type$ChangeSum = function (a) {
 	return {ctor: 'ChangeSum', _0: a};
+};
+var _user$project$Type$ChangeEmail = function (a) {
+	return {ctor: 'ChangeEmail', _0: a};
 };
 var _user$project$Type$NoOp = {ctor: 'NoOp'};
 
@@ -8349,6 +8352,14 @@ var _user$project$SendPaymentLetterForm$update = F2(
 		switch (_p0.ctor) {
 			case 'NoOp':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'ChangeEmail':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{email: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 			case 'ChangeSum':
 				return {
 					ctor: '_Tuple2',
@@ -8390,7 +8401,7 @@ var _user$project$SendPaymentLetterForm$update = F2(
 		}
 	});
 var _user$project$SendPaymentLetterForm$init = function (flags) {
-	var model = A8(_user$project$Type$Model, flags.account, flags.defaultSum, flags.defaultTarget, flags.successURL, false, false, false, false);
+	var model = A9(_user$project$Type$Model, flags.account, flags.email, flags.sum, flags.target, flags.successURL, false, false, false, false);
 	return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 };
 var _user$project$SendPaymentLetterForm$main = {
@@ -8402,18 +8413,23 @@ var _user$project$SendPaymentLetterForm$main = {
 		function (account) {
 			return A2(
 				_elm_lang$core$Json_Decode$andThen,
-				A2(_elm_lang$core$Json_Decode_ops[':='], 'defaultSum', _elm_lang$core$Json_Decode$string),
-				function (defaultSum) {
+				A2(_elm_lang$core$Json_Decode_ops[':='], 'email', _elm_lang$core$Json_Decode$string),
+				function (email) {
 					return A2(
 						_elm_lang$core$Json_Decode$andThen,
-						A2(_elm_lang$core$Json_Decode_ops[':='], 'defaultTarget', _elm_lang$core$Json_Decode$string),
-						function (defaultTarget) {
+						A2(_elm_lang$core$Json_Decode_ops[':='], 'successURL', _elm_lang$core$Json_Decode$string),
+						function (successURL) {
 							return A2(
 								_elm_lang$core$Json_Decode$andThen,
-								A2(_elm_lang$core$Json_Decode_ops[':='], 'successURL', _elm_lang$core$Json_Decode$string),
-								function (successURL) {
-									return _elm_lang$core$Json_Decode$succeed(
-										{account: account, defaultSum: defaultSum, defaultTarget: defaultTarget, successURL: successURL});
+								A2(_elm_lang$core$Json_Decode_ops[':='], 'sum', _elm_lang$core$Json_Decode$string),
+								function (sum) {
+									return A2(
+										_elm_lang$core$Json_Decode$andThen,
+										A2(_elm_lang$core$Json_Decode_ops[':='], 'target', _elm_lang$core$Json_Decode$string),
+										function (target) {
+											return _elm_lang$core$Json_Decode$succeed(
+												{account: account, email: email, successURL: successURL, sum: sum, target: target});
+										});
 								});
 						});
 				});

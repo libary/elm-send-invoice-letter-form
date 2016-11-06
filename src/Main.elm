@@ -9,7 +9,7 @@ import Helpers exposing (..)
 init : Flags -> ( Model, Cmd Msg )
 init flags =
     let
-        model = Model flags.account flags.defaultSum flags.defaultTarget flags.successURL False False False False
+        model = Model flags.account flags.email flags.sum flags.target flags.successURL False False False False
     in      
         ( model, Cmd.none )
 
@@ -18,6 +18,8 @@ update msg model =
     case msg of
         NoOp ->
             ( model, Cmd.none )
+        ChangeEmail newEmail ->
+            ( {model | email = newEmail}, Cmd.none )
         ChangeSum newSum->
             ( {model | sum = newSum}, Cmd.none)
         ChangeTarget newTarget ->

@@ -2,13 +2,15 @@ module Type exposing (..)
 
 type alias Flags = {
     account : String,
-    defaultSum : String,
-    defaultTarget : String,
+    email : String,
+    sum : String,
+    target : String,
     successURL : String       
 }
 
 type alias Model = {
     account : String,
+    email : String,
     sum : String,
     target : String,
     url : String,
@@ -20,6 +22,7 @@ type alias Model = {
 
 type Msg
   = NoOp
+  | ChangeEmail String
   | ChangeSum String
   | ChangeTarget String
   | ChangeUrl String
