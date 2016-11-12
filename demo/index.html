@@ -10,11 +10,11 @@
     <script>
         var node = document.getElementById('form');
         var app = Elm.Main.embed(node, {
-            account : "1234567890",
             email : "123@mail.ru",
             sum : "1000",
             target : "Оплата публикации объявления",
-            successURL : "http://mail.ru"
+            url : "http://mail.ru",
+            render : "adv"
         });
     </script>
 </body>

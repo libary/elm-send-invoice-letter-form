@@ -1,23 +1,28 @@
 module Type exposing (..)
 
-type alias Flags = {
-    account : String,
-    email : String,
-    sum : String,
-    target : String,
-    successURL : String       
-}
+import Http
 
-type alias Model = {
-    account : String,
-    email : String,
-    sum : String,
-    target : String,
-    url : String,
-    errorOnSum : Bool,
-    errorOnTarget : Bool,
-    errorOnUrl : Bool,
-    complete : Bool
+type alias Flags = 
+    { email : String
+    , sum : String
+    , target : String
+    , url : String
+    , render : String }
+
+type Render
+    = Adv
+    | Baza4Sms
+
+type alias Model = 
+    { email : String
+    , sum : String
+    , target : String
+    , url : String
+    , render : Render
+    , errorOnEmail : Bool
+    , errorOnSum : Bool
+    , errorOnTarget : Bool
+    , invoiceSent : Maybe Bool
 }
 
 type Msg
@@ -25,6 +30,6 @@ type Msg
   | ChangeEmail String
   | ChangeSum String
   | ChangeTarget String
-  | ChangeUrl String
   | SendInit
-  | SendComplete
+  | SendSucceed Bool
+  | SendFail Http.Error
