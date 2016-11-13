@@ -9141,6 +9141,21 @@ var _user$project$Type$ChangeEmail = function (a) {
 };
 var _user$project$Type$NoOp = {ctor: 'NoOp'};
 
+var _user$project$Helpers$validateTarget = function (target) {
+	return _elm_lang$core$Basics$not(
+		_elm_lang$core$String$isEmpty(target));
+};
+var _user$project$Helpers$validateSum = function (sum) {
+	return _elm_lang$core$Basics$not(
+		_elm_lang$core$String$isEmpty(sum)) && (!_elm_lang$core$Native_Utils.eq(
+		_elm_lang$core$Result$toMaybe(
+			_elm_lang$core$String$toFloat(sum)),
+		_elm_lang$core$Maybe$Nothing));
+};
+var _user$project$Helpers$validateEmail = function (email) {
+	return _elm_lang$core$Basics$not(
+		_elm_lang$core$String$isEmpty(email));
+};
 var _user$project$Helpers$decodeResult = function () {
 	var resultField = 'result';
 	return A2(
@@ -9165,62 +9180,43 @@ var _user$project$Helpers$sendInvoice = function (model) {
 		A3(_evancz$elm_http$Http$post, _user$project$Helpers$decodeResult, url, body));
 };
 
-var _user$project$View$bazaView = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[]));
-};
-var _user$project$View$advView = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[]));
-};
-var _user$project$View$view = function (model) {
-	var _p0 = model.render;
-	if (_p0.ctor === 'Adv') {
-		return _user$project$View$advView(model);
-	} else {
-		return _user$project$View$bazaView(model);
-	}
-};
-
-var _user$project$SendPaymentLetterForm$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$none;
-};
-var _user$project$SendPaymentLetterForm$update = F2(
+var _user$project$Update$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
 		switch (_p0.ctor) {
 			case 'NoOp':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'ChangeEmail':
+				var _p1 = _p0._0;
+				var errorOnEmail = _elm_lang$core$Basics$not(
+					_user$project$Helpers$validateEmail(_p1));
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{email: _p0._0}),
+						{email: _p1, errorOnEmail: errorOnEmail}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'ChangeSum':
+				var _p2 = _p0._0;
+				var errorOnSum = _elm_lang$core$Basics$not(
+					_user$project$Helpers$validateSum(_p2));
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{sum: _p0._0}),
+						{sum: _p2, errorOnSum: errorOnSum}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'ChangeTarget':
+				var _p3 = _p0._0;
+				var errorOnTarget = _elm_lang$core$Basics$not(
+					_user$project$Helpers$validateTarget(_p3));
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{target: _p0._0}),
+						{target: _p3, errorOnTarget: errorOnTarget}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'SendInit':
@@ -9251,6 +9247,35 @@ var _user$project$SendPaymentLetterForm$update = F2(
 				};
 		}
 	});
+
+var _user$project$View$bazaView = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[]));
+};
+var _user$project$View$advView = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[]));
+};
+var _user$project$View$view = function (model) {
+	var _p0 = model.render;
+	if (_p0.ctor === 'Adv') {
+		return _user$project$View$advView(model);
+	} else {
+		return _user$project$View$bazaView(model);
+	}
+};
+
+var _user$project$SendPaymentLetterForm$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
 var _user$project$SendPaymentLetterForm$init = function (flags) {
 	var render = _elm_lang$core$Native_Utils.eq(flags.render, 'adv') ? _user$project$Type$Adv : _user$project$Type$Baza4Sms;
 	var model = A9(_user$project$Type$Model, flags.email, flags.sum, flags.target, flags.url, render, false, false, false, _elm_lang$core$Maybe$Nothing);
@@ -9258,7 +9283,7 @@ var _user$project$SendPaymentLetterForm$init = function (flags) {
 };
 var _user$project$SendPaymentLetterForm$main = {
 	main: _elm_lang$html$Html_App$programWithFlags(
-		{init: _user$project$SendPaymentLetterForm$init, view: _user$project$View$view, update: _user$project$SendPaymentLetterForm$update, subscriptions: _user$project$SendPaymentLetterForm$subscriptions}),
+		{init: _user$project$SendPaymentLetterForm$init, view: _user$project$View$view, update: _user$project$Update$update, subscriptions: _user$project$SendPaymentLetterForm$subscriptions}),
 	flags: A2(
 		_elm_lang$core$Json_Decode$andThen,
 		A2(_elm_lang$core$Json_Decode_ops[':='], 'email', _elm_lang$core$Json_Decode$string),

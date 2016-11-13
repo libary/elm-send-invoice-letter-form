@@ -2,7 +2,7 @@ module Type exposing (..)
 
 import Http
 
-type alias Flags = 
+type alias Flags =
     { email : String
     , sum : String
     , target : String
@@ -13,7 +13,7 @@ type Render
     = Adv
     | Baza4Sms
 
-type alias Model = 
+type alias Model =
     { email : String
     , sum : String
     , target : String
