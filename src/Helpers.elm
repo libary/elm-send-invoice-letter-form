@@ -13,10 +13,9 @@ sendInvoice model =
     let
         url = model.url
         body = multipart
-            [ stringData "email" model.email
+            [ stringData "target" model.target
             , stringData "sum" model.sum
-            , stringData "target" model.target
-            ]
+            , stringData "email" model.email ]
     in
         Task.perform SendFail SendSucceed (Http.post decodeResult url body)
 
@@ -27,16 +26,16 @@ decodeResult =
     in
         Json.at [resultField] Json.bool
 
-validateEmail : String -> Bool
-validateEmail email =
-  not (String.isEmpty email)
+validateTarget : Model -> Bool
+validateTarget model =
+    not (String.isEmpty model.target)
 
-validateSum : String -> Bool
-validateSum sum =
-  not (String.isEmpty sum)
-  &&
-  Result.toMaybe (String.toFloat sum) /= Nothing
+validateSum : Model -> Bool
+validateSum model =
+    not (String.isEmpty model.sum)
+    &&
+    Result.toMaybe (String.toFloat model.sum) /= Nothing
 
-validateTarget : String -> Bool
-validateTarget target =
-  not (String.isEmpty target)
+validateEmail : Model -> Bool
+validateEmail model =
+    not (String.isEmpty model.email)

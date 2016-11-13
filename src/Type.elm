@@ -3,9 +3,9 @@ module Type exposing (..)
 import Http
 
 type alias Flags =
-    { email : String
+    { target : String
     , sum : String
-    , target : String
+    , email : String
     , url : String
     , render : String }
 
@@ -14,9 +14,9 @@ type Render
     | Baza4Sms
 
 type alias Model =
-    { email : String
+    { target : String
     , sum : String
-    , target : String
+    , email : String
     , url : String
     , render : Render
     , errorOnEmail : Bool
@@ -26,10 +26,13 @@ type alias Model =
 }
 
 type Msg
-  = NoOp
-  | ChangeEmail String
-  | ChangeSum String
-  | ChangeTarget String
-  | SendInit
-  | SendSucceed Bool
-  | SendFail Http.Error
+    = NoOp
+    | ChangeTarget String
+    | ChangeSum String
+    | ChangeEmail String 
+    | ValidateEmail
+    | ValidateSum
+    | ValidateTarget
+    | SendInit
+    | SendSucceed Bool
+    | SendFail Http.Error

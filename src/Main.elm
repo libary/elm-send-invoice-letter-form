@@ -16,7 +16,7 @@ init flags =
             else
                 Baza4Sms
 
-        model = Model flags.email flags.sum flags.target flags.url render False False False Nothing
+        model = Model flags.target flags.sum flags.email flags.url render False False False Nothing
     in
         (model, Cmd.none)
 
