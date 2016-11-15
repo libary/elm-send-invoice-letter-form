@@ -18,7 +18,7 @@ update msg model =
             ({model | sum = newSum}, message ValidateSum)
 
         ChangeEmail newEmail ->
-            ({model | email = newEmail}, message ValidateEmail)     
+            ({model | email = newEmail}, message ValidateEmail)
 
         ValidateTarget ->
             ({model | errorOnTarget = not (validateTarget model)}, Cmd.none)
@@ -27,10 +27,11 @@ update msg model =
             ({model | errorOnSum = not (validateSum model)}, Cmd.none)
 
         ValidateEmail ->
-            ({model | errorOnEmail = not (validateEmail model)}, Cmd.none)        
+            ({model | errorOnEmail = not (validateEmail model)}, Cmd.none)
 
         SendInit ->
-            (model, sendInvoice model)
+            -- (model, sendInvoice model)
+            ({model | invoiceSent = Just True }, Cmd.none)
 
         SendSucceed result ->
             ({model | invoiceSent = Just result }, Cmd.none)

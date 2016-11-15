@@ -11,7 +11,7 @@ type alias Flags =
 
 type Render
     = Adv
-    | Baza4Sms
+    | Baza
 
 type alias Model =
     { target : String
@@ -29,7 +29,7 @@ type Msg
     = NoOp
     | ChangeTarget String
     | ChangeSum String
-    | ChangeEmail String 
+    | ChangeEmail String
     | ValidateEmail
     | ValidateSum
     | ValidateTarget
