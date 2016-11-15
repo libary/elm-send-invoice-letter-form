@@ -9,10 +9,10 @@
     <script src="form.min.js"></script>
     <script>
         var node = document.getElementById('form');
-        var app = Elm.SendPaymentLetterForm.embed(node, {
+        var app = Elm.SendInvoiceLetterForm.embed(node, {
             target : "Оплата публикации объявления",
             sum : "1000",
-            email : "123@mail.ru",            
+            email : "123@mail.ru",
             url : "http://mail.ru",
             render : "adv"
         });

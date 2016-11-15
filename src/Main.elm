@@ -1,4 +1,4 @@
-module SendPaymentLetterForm exposing (..)
+module SendInvoiceLetterForm exposing (..)
 
 import Html.App as App
 

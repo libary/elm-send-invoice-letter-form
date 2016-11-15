@@ -1,4 +1,4 @@
-# elm-send-payment-letter-form
+# elm-send-invoice-letter-form
 Form to send invoice letter
 
 собрать:

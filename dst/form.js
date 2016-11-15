@@ -9728,17 +9728,17 @@ var _user$project$View$view = function (model) {
 	}
 };
 
-var _user$project$SendPaymentLetterForm$subscriptions = function (model) {
+var _user$project$SendInvoiceLetterForm$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
 };
-var _user$project$SendPaymentLetterForm$init = function (flags) {
+var _user$project$SendInvoiceLetterForm$init = function (flags) {
 	var render = _elm_lang$core$Native_Utils.eq(flags.render, 'adv') ? _user$project$Type$Adv : _user$project$Type$Baza;
 	var model = A9(_user$project$Type$Model, flags.target, flags.sum, flags.email, flags.url, render, false, false, false, _elm_lang$core$Maybe$Nothing);
 	return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 };
-var _user$project$SendPaymentLetterForm$main = {
+var _user$project$SendInvoiceLetterForm$main = {
 	main: _elm_lang$html$Html_App$programWithFlags(
-		{init: _user$project$SendPaymentLetterForm$init, view: _user$project$View$view, update: _user$project$Update$update, subscriptions: _user$project$SendPaymentLetterForm$subscriptions}),
+		{init: _user$project$SendInvoiceLetterForm$init, view: _user$project$View$view, update: _user$project$Update$update, subscriptions: _user$project$SendInvoiceLetterForm$subscriptions}),
 	flags: A2(
 		_elm_lang$core$Json_Decode$andThen,
 		A2(_elm_lang$core$Json_Decode_ops[':='], 'email', _elm_lang$core$Json_Decode$string),
@@ -9769,8 +9769,8 @@ var _user$project$SendPaymentLetterForm$main = {
 };
 
 var Elm = {};
-Elm['SendPaymentLetterForm'] = Elm['SendPaymentLetterForm'] || {};
-_elm_lang$core$Native_Platform.addPublicModule(Elm['SendPaymentLetterForm'], 'SendPaymentLetterForm', typeof _user$project$SendPaymentLetterForm$main === 'undefined' ? null : _user$project$SendPaymentLetterForm$main);
+Elm['SendInvoiceLetterForm'] = Elm['SendInvoiceLetterForm'] || {};
+_elm_lang$core$Native_Platform.addPublicModule(Elm['SendInvoiceLetterForm'], 'SendInvoiceLetterForm', typeof _user$project$SendInvoiceLetterForm$main === 'undefined' ? null : _user$project$SendInvoiceLetterForm$main);
 
 if (typeof define === "function" && define['amd'])
 {
