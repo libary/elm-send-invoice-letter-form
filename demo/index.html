@@ -10,11 +10,13 @@
     <script>
         var node = document.getElementById('form');
         var app = Elm.SendInvoiceLetterForm.embed(node, {
+            id : "1234",
             target : "Оплата публикации объявления",
             sum : "1000",
             email : "123@mail.ru",
-            url : "http://mail.ru",
-            render : "adv"
+            render : "adv",
+            sendUrl : "http://mail.ru",
+            successUrl : "http://yandex.ru"
         });
     </script>
 </body>

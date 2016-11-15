@@ -9222,14 +9222,33 @@ var _shmookey$cmd_extra$Cmd_Extra$message = function (x) {
 		_elm_lang$core$Task$succeed(x));
 };
 
-var _user$project$Type$Flags = F5(
-	function (a, b, c, d, e) {
-		return {target: a, sum: b, email: c, url: d, render: e};
+var _user$project$Type$Flags = F7(
+	function (a, b, c, d, e, f, g) {
+		return {id: a, target: b, sum: c, email: d, render: e, sendUrl: f, successUrl: g};
 	});
-var _user$project$Type$Model = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {target: a, sum: b, email: c, url: d, render: e, errorOnEmail: f, errorOnSum: g, errorOnTarget: h, invoiceSent: i};
-	});
+var _user$project$Type$Model = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return {id: a, target: b, sum: c, email: d, render: e, sendUrl: f, successUrl: g, errorOnTarget: h, errorOnSum: i, errorOnEmail: j, invoiceSent: k};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
 var _user$project$Type$Baza = {ctor: 'Baza'};
 var _user$project$Type$Adv = {ctor: 'Adv'};
 var _user$project$Type$SendFail = function (a) {
@@ -9297,8 +9316,6 @@ var _user$project$AdvView$advEmailView = function (model) {
 						]),
 					_elm_lang$core$Native_List.fromArray(
 						[])),
-					_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
-					_elm_lang$html$Html$text('руб.'),
 					A2(
 					_elm_lang$html$Html$br,
 					_elm_lang$core$Native_List.fromArray(
@@ -9527,31 +9544,29 @@ var _user$project$AdvView$invoiceReadyView = function (model) {
 				_elm_lang$core$Native_List.fromArray(
 					[
 						A2(
-						_elm_lang$html$Html$button,
+						_elm_lang$html$Html$input,
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_elm_lang$html$Html_Attributes$type$('submit'),
-								_elm_lang$html$Html_Attributes$class('button')
+								_elm_lang$html$Html_Attributes$class('button'),
+								_elm_lang$html$Html_Attributes$value('отправить')
 							]),
 						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('отправить')
-							])),
+							[])),
 						_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
 						_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
 						_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
 						A2(
-						_elm_lang$html$Html$button,
+						_elm_lang$html$Html$input,
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_elm_lang$html$Html_Attributes$type$('button'),
 								_elm_lang$html$Html_Attributes$class(' button'),
+								_elm_lang$html$Html_Attributes$value('отмена'),
 								A2(_elm_lang$html$Html_Attributes$attribute, 'onclick', 'window.history.back();')
 							]),
 						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('отмена')
-							]))
+							[]))
 					]))
 			]));
 };
@@ -9611,11 +9626,13 @@ var _user$project$Helpers$sendInvoice = function (model) {
 	var body = _evancz$elm_http$Http$multipart(
 		_elm_lang$core$Native_List.fromArray(
 			[
+				A2(_evancz$elm_http$Http$stringData, 'id', model.id),
 				A2(_evancz$elm_http$Http$stringData, 'target', model.target),
 				A2(_evancz$elm_http$Http$stringData, 'sum', model.sum),
-				A2(_evancz$elm_http$Http$stringData, 'email', model.email)
+				A2(_evancz$elm_http$Http$stringData, 'email', model.email),
+				A2(_evancz$elm_http$Http$stringData, 'successUrl', model.successUrl)
 			]));
-	var url = model.url;
+	var url = model.sendUrl;
 	return A3(
 		_elm_lang$core$Task$perform,
 		_user$project$Type$SendFail,
@@ -9689,12 +9706,8 @@ var _user$project$Update$update = F2(
 			case 'SendInit':
 				return {
 					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{
-							invoiceSent: _elm_lang$core$Maybe$Just(true)
-						}),
-					_1: _elm_lang$core$Platform_Cmd$none
+					_0: model,
+					_1: _user$project$Helpers$sendInvoice(model)
 				};
 			case 'SendSucceed':
 				return {
@@ -9733,7 +9746,7 @@ var _user$project$SendInvoiceLetterForm$subscriptions = function (model) {
 };
 var _user$project$SendInvoiceLetterForm$init = function (flags) {
 	var render = _elm_lang$core$Native_Utils.eq(flags.render, 'adv') ? _user$project$Type$Adv : _user$project$Type$Baza;
-	var model = A9(_user$project$Type$Model, flags.target, flags.sum, flags.email, flags.url, render, false, false, false, _elm_lang$core$Maybe$Nothing);
+	var model = _user$project$Type$Model(flags.id)(flags.target)(flags.sum)(flags.email)(render)(flags.sendUrl)(flags.successUrl)(false)(false)(false)(_elm_lang$core$Maybe$Nothing);
 	return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 };
 var _user$project$SendInvoiceLetterForm$main = {
@@ -9745,22 +9758,32 @@ var _user$project$SendInvoiceLetterForm$main = {
 		function (email) {
 			return A2(
 				_elm_lang$core$Json_Decode$andThen,
-				A2(_elm_lang$core$Json_Decode_ops[':='], 'render', _elm_lang$core$Json_Decode$string),
-				function (render) {
+				A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
+				function (id) {
 					return A2(
 						_elm_lang$core$Json_Decode$andThen,
-						A2(_elm_lang$core$Json_Decode_ops[':='], 'sum', _elm_lang$core$Json_Decode$string),
-						function (sum) {
+						A2(_elm_lang$core$Json_Decode_ops[':='], 'render', _elm_lang$core$Json_Decode$string),
+						function (render) {
 							return A2(
 								_elm_lang$core$Json_Decode$andThen,
-								A2(_elm_lang$core$Json_Decode_ops[':='], 'target', _elm_lang$core$Json_Decode$string),
-								function (target) {
+								A2(_elm_lang$core$Json_Decode_ops[':='], 'sendUrl', _elm_lang$core$Json_Decode$string),
+								function (sendUrl) {
 									return A2(
 										_elm_lang$core$Json_Decode$andThen,
-										A2(_elm_lang$core$Json_Decode_ops[':='], 'url', _elm_lang$core$Json_Decode$string),
-										function (url) {
-											return _elm_lang$core$Json_Decode$succeed(
-												{email: email, render: render, sum: sum, target: target, url: url});
+										A2(_elm_lang$core$Json_Decode_ops[':='], 'successUrl', _elm_lang$core$Json_Decode$string),
+										function (successUrl) {
+											return A2(
+												_elm_lang$core$Json_Decode$andThen,
+												A2(_elm_lang$core$Json_Decode_ops[':='], 'sum', _elm_lang$core$Json_Decode$string),
+												function (sum) {
+													return A2(
+														_elm_lang$core$Json_Decode$andThen,
+														A2(_elm_lang$core$Json_Decode_ops[':='], 'target', _elm_lang$core$Json_Decode$string),
+														function (target) {
+															return _elm_lang$core$Json_Decode$succeed(
+																{email: email, id: id, render: render, sendUrl: sendUrl, successUrl: successUrl, sum: sum, target: target});
+														});
+												});
 										});
 								});
 						});

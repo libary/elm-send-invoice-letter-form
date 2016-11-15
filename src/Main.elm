@@ -16,7 +16,8 @@ init flags =
             else
                 Baza
 
-        model = Model flags.target flags.sum flags.email flags.url render False False False Nothing
+        model =
+            Model flags.id flags.target flags.sum flags.email render flags.sendUrl flags.successUrl False False False Nothing
     in
         (model, Cmd.none)
 

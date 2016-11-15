@@ -30,8 +30,8 @@ update msg model =
             ({model | errorOnEmail = not (validateEmail model)}, Cmd.none)
 
         SendInit ->
-            -- (model, sendInvoice model)
-            ({model | invoiceSent = Just True }, Cmd.none)
+            (model, sendInvoice model)
+            -- ({model | invoiceSent = Just True }, Cmd.none)
 
         SendSucceed result ->
             ({model | invoiceSent = Just result }, Cmd.none)

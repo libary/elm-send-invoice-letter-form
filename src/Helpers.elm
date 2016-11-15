@@ -11,17 +11,25 @@ import Result
 sendInvoice : Model -> Cmd Msg
 sendInvoice model =
     let
-        url = model.url
-        body = multipart
-            [ stringData "target" model.target
-            , stringData "sum" model.sum
-            , stringData "email" model.email ]
+        url : String
+        url = model.sendUrl
+
+        body : Http.Body
+        body =
+            multipart
+                [ stringData "id" model.id
+                , stringData "target" model.target
+                , stringData "sum" model.sum
+                , stringData "email" model.email
+                , stringData "successUrl" model.successUrl
+                ]
     in
         Task.perform SendFail SendSucceed (Http.post decodeResult url body)
 
 decodeResult : Json.Decoder Bool
 decodeResult =
     let
+        resultField : String
         resultField = "result"
     in
         Json.at [resultField] Json.bool

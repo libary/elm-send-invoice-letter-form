@@ -3,25 +3,29 @@ module Type exposing (..)
 import Http
 
 type alias Flags =
-    { target : String
+    { id : String
+    , target : String
     , sum : String
     , email : String
-    , url : String
-    , render : String }
+    , render : String
+    , sendUrl : String
+    , successUrl : String }
 
 type Render
     = Adv
     | Baza
 
 type alias Model =
-    { target : String
+    { id : String
+    , target : String
     , sum : String
     , email : String
-    , url : String
     , render : Render
-    , errorOnEmail : Bool
-    , errorOnSum : Bool
+    , sendUrl : String
+    , successUrl : String
     , errorOnTarget : Bool
+    , errorOnSum : Bool
+    , errorOnEmail : Bool
     , invoiceSent : Maybe Bool
 }
 

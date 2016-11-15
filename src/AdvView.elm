@@ -51,6 +51,7 @@ advView model =
 invoiceReadyView : Model -> Html Msg
 invoiceReadyView model =
     let
+        nodes : List (Html Msg)
         nodes =
             (advEmailView model)
             |> append (advSumView model)
@@ -60,11 +61,11 @@ invoiceReadyView model =
             [ fieldset []
                 (append [ legend [] [ text "Отправить счёт на оплату по почте" ] ] nodes)
             , p []
-                [ button [ type' "submit", class "button" ] [ text "отправить" ]
+                [ input [ type' "submit", class "button", value "отправить" ] []
                 , text nbsp
                 , text nbsp
                 , text nbsp
-                , button [ type' "button", class " button", attribute "onclick" "window.history.back();"] [ text "отмена" ]
+                , input [ type' "button", class " button", value "отмена", attribute "onclick" "window.history.back();" ] []
                 ]
             ]
 
@@ -146,8 +147,6 @@ advEmailView model =
             , name "Email"
             , value model.email
             ] []
-        , text nbsp
-        , text "руб."
         , br [] []
         , span [ classList
                     [ ("field-validation-valid", not model.errorOnEmail)
