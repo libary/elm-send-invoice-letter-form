@@ -24,7 +24,10 @@ sendInvoice model =
                 , stringData "successUrl" model.successUrl
                 ]
     in
-        Task.perform SendFail SendSucceed (Http.post decodeResult url body)
+        if (validate model) == True then
+            Task.perform SendFail SendSucceed (Http.post decodeResult url body)
+        else
+            Cmd.none
 
 decodeResult : Json.Decoder Bool
 decodeResult =
@@ -47,3 +50,7 @@ validateSum model =
 validateEmail : Model -> Bool
 validateEmail model =
     not (String.isEmpty model.email)
+
+validate : Model -> Bool
+validate model =
+    not model.errorOnTarget && not model.errorOnSum && not model.errorOnEmail

@@ -9272,333 +9272,9 @@ var _user$project$Type$ChangeTarget = function (a) {
 };
 var _user$project$Type$NoOp = {ctor: 'NoOp'};
 
-var _user$project$AdvView$advEmailView = function (model) {
-	return _elm_lang$core$Native_List.fromArray(
-		[
-			A2(
-			_elm_lang$html$Html$div,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$class('editor-label')
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					A2(
-					_elm_lang$html$Html$label,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$for('Email')
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html$text('email')
-						])),
-					_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
-					_elm_lang$html$Html$text('(*)')
-				])),
-			A2(
-			_elm_lang$html$Html$div,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$class('editor-field')
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					A2(
-					_elm_lang$html$Html$input,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$type$('email'),
-							_elm_lang$html$Html_Attributes$class('text-box'),
-							_elm_lang$html$Html_Attributes$placeholder('укажите email'),
-							_elm_lang$html$Html_Attributes$name('Email'),
-							_elm_lang$html$Html_Attributes$value(model.email)
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[])),
-					A2(
-					_elm_lang$html$Html$br,
-					_elm_lang$core$Native_List.fromArray(
-						[]),
-					_elm_lang$core$Native_List.fromArray(
-						[])),
-					A2(
-					_elm_lang$html$Html$span,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$classList(
-							_elm_lang$core$Native_List.fromArray(
-								[
-									{
-									ctor: '_Tuple2',
-									_0: 'field-validation-valid',
-									_1: _elm_lang$core$Basics$not(model.errorOnEmail)
-								},
-									{ctor: '_Tuple2', _0: 'field-validation-invalid', _1: model.errorOnEmail}
-								]))
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html$text('проверьте указанный email')
-						]))
-				]))
-		]);
+var _user$project$Helpers$validate = function (model) {
+	return _elm_lang$core$Basics$not(model.errorOnTarget) && (_elm_lang$core$Basics$not(model.errorOnSum) && _elm_lang$core$Basics$not(model.errorOnEmail));
 };
-var _user$project$AdvView$advSumView = function (model) {
-	return _elm_lang$core$Native_List.fromArray(
-		[
-			A2(
-			_elm_lang$html$Html$div,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$class('editor-label')
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					A2(
-					_elm_lang$html$Html$label,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$for('Sum')
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html$text('сумма к оплате')
-						])),
-					_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
-					_elm_lang$html$Html$text('(*)')
-				])),
-			A2(
-			_elm_lang$html$Html$div,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$class('editor-field')
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					A2(
-					_elm_lang$html$Html$input,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$type$('text'),
-							_elm_lang$html$Html_Attributes$class('text-box'),
-							_elm_lang$html$Html_Attributes$placeholder('укажите сумму к оплате'),
-							_elm_lang$html$Html_Attributes$name('Sum'),
-							_elm_lang$html$Html_Attributes$value(model.sum)
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[])),
-					_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
-					_elm_lang$html$Html$text('руб.'),
-					A2(
-					_elm_lang$html$Html$br,
-					_elm_lang$core$Native_List.fromArray(
-						[]),
-					_elm_lang$core$Native_List.fromArray(
-						[])),
-					A2(
-					_elm_lang$html$Html$span,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$classList(
-							_elm_lang$core$Native_List.fromArray(
-								[
-									{
-									ctor: '_Tuple2',
-									_0: 'field-validation-valid',
-									_1: _elm_lang$core$Basics$not(model.errorOnSum)
-								},
-									{ctor: '_Tuple2', _0: 'field-validation-invalid', _1: model.errorOnSum}
-								]))
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html$text('проверьте указанную сумму')
-						]))
-				]))
-		]);
-};
-var _user$project$AdvView$advTargetView = function (model) {
-	return _elm_lang$core$Native_List.fromArray(
-		[
-			A2(
-			_elm_lang$html$Html$div,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$class('editor-label')
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					A2(
-					_elm_lang$html$Html$label,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$for('Title')
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html$text('назначение платежа')
-						])),
-					_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
-					_elm_lang$html$Html$text('(*)')
-				])),
-			A2(
-			_elm_lang$html$Html$div,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$class('editor-field')
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					A2(
-					_elm_lang$html$Html$input,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$type$('text'),
-							_elm_lang$html$Html_Attributes$class('text-box-long'),
-							_elm_lang$html$Html_Attributes$placeholder('укажите назначение платежа'),
-							_elm_lang$html$Html_Attributes$name('Title'),
-							_elm_lang$html$Html_Attributes$value(model.target)
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[])),
-					A2(
-					_elm_lang$html$Html$br,
-					_elm_lang$core$Native_List.fromArray(
-						[]),
-					_elm_lang$core$Native_List.fromArray(
-						[])),
-					A2(
-					_elm_lang$html$Html$span,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$classList(
-							_elm_lang$core$Native_List.fromArray(
-								[
-									{
-									ctor: '_Tuple2',
-									_0: 'field-validation-valid',
-									_1: _elm_lang$core$Basics$not(model.errorOnEmail)
-								},
-									{ctor: '_Tuple2', _0: 'field-validation-invalid', _1: model.errorOnEmail}
-								]))
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html$text('укажите назначение платежа')
-						]))
-				]))
-		]);
-};
-var _user$project$AdvView$invoiceSentView = function (model) {
-	var message = _elm_lang$core$Native_Utils.eq(
-		model.invoiceSent,
-		_elm_lang$core$Maybe$Just(true)) ? 'счёт на оплату отослан' : 'счёт на оплату не удалось отправить';
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html$text(message)
-			]));
-};
-var _user$project$AdvView$invoiceReadyView = function (model) {
-	var nodes = A2(
-		_elm_lang$core$List$append,
-		_user$project$AdvView$advTargetView(model),
-		A2(
-			_elm_lang$core$List$append,
-			_user$project$AdvView$advSumView(model),
-			_user$project$AdvView$advEmailView(model)));
-	return A2(
-		_elm_lang$html$Html$form,
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html_Events$onSubmit(_user$project$Type$SendInit)
-			]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				A2(
-				_elm_lang$html$Html$fieldset,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				A2(
-					_elm_lang$core$List$append,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							A2(
-							_elm_lang$html$Html$legend,
-							_elm_lang$core$Native_List.fromArray(
-								[]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html$text('Отправить счёт на оплату по почте')
-								]))
-						]),
-					nodes)),
-				A2(
-				_elm_lang$html$Html$p,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_elm_lang$html$Html$input,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$type$('submit'),
-								_elm_lang$html$Html_Attributes$class('button'),
-								_elm_lang$html$Html_Attributes$value('отправить')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[])),
-						_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
-						_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
-						_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
-						A2(
-						_elm_lang$html$Html$input,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$type$('button'),
-								_elm_lang$html$Html_Attributes$class(' button'),
-								_elm_lang$html$Html_Attributes$value('отмена'),
-								A2(_elm_lang$html$Html_Attributes$attribute, 'onclick', 'window.history.back();')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[]))
-					]))
-			]));
-};
-var _user$project$AdvView$advView = function (model) {
-	return _elm_lang$core$Native_Utils.eq(model.invoiceSent, _elm_lang$core$Maybe$Nothing) ? _user$project$AdvView$invoiceReadyView(model) : _user$project$AdvView$invoiceSentView(model);
-};
-
-var _user$project$BazaView$invoiceSentView = function (model) {
-	var message = _elm_lang$core$Native_Utils.eq(
-		model.invoiceSent,
-		_elm_lang$core$Maybe$Just(true)) ? 'счёт на оплату отослан' : 'счёт на оплату не удалось отправить';
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html$text(message)
-			]));
-};
-var _user$project$BazaView$invoiceReadyView = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[]));
-};
-var _user$project$BazaView$bazaView = function (model) {
-	return _elm_lang$core$Native_Utils.eq(model.invoiceSent, _elm_lang$core$Maybe$Nothing) ? _user$project$BazaView$invoiceReadyView(model) : _user$project$BazaView$invoiceSentView(model);
-};
-
 var _user$project$Helpers$validateEmail = function (model) {
 	return _elm_lang$core$Basics$not(
 		_elm_lang$core$String$isEmpty(model.email));
@@ -9633,11 +9309,13 @@ var _user$project$Helpers$sendInvoice = function (model) {
 				A2(_evancz$elm_http$Http$stringData, 'successUrl', model.successUrl)
 			]));
 	var url = model.sendUrl;
-	return A3(
+	return _elm_lang$core$Native_Utils.eq(
+		_user$project$Helpers$validate(model),
+		true) ? A3(
 		_elm_lang$core$Task$perform,
 		_user$project$Type$SendFail,
 		_user$project$Type$SendSucceed,
-		A3(_evancz$elm_http$Http$post, _user$project$Helpers$decodeResult, url, body));
+		A3(_evancz$elm_http$Http$post, _user$project$Helpers$decodeResult, url, body)) : _elm_lang$core$Platform_Cmd$none;
 };
 
 var _user$project$Update$update = F2(
@@ -9732,12 +9410,362 @@ var _user$project$Update$update = F2(
 		}
 	});
 
+var _user$project$View_Adv$emailView = function (model) {
+	return _elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('editor-label')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$label,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$for('Email')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text('email')
+						])),
+					_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
+					_elm_lang$html$Html$text('(*)')
+				])),
+			A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('editor-field')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$input,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$type$('email'),
+							_elm_lang$html$Html_Attributes$classList(
+							_elm_lang$core$Native_List.fromArray(
+								[
+									{ctor: '_Tuple2', _0: 'text-box', _1: true},
+									{ctor: '_Tuple2', _0: 'input-validation-error', _1: model.errorOnEmail}
+								])),
+							_elm_lang$html$Html_Attributes$placeholder('укажите email'),
+							_elm_lang$html$Html_Attributes$name('Email'),
+							_elm_lang$html$Html_Attributes$value(model.email),
+							_elm_lang$html$Html_Events$onInput(_user$project$Type$ChangeEmail)
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[])),
+					A2(
+					_elm_lang$html$Html$br,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[])),
+					A2(
+					_elm_lang$html$Html$span,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$classList(
+							_elm_lang$core$Native_List.fromArray(
+								[
+									{
+									ctor: '_Tuple2',
+									_0: 'field-validation-valid',
+									_1: _elm_lang$core$Basics$not(model.errorOnEmail)
+								},
+									{ctor: '_Tuple2', _0: 'field-validation-invalid', _1: model.errorOnEmail},
+									{ctor: '_Tuple2', _0: 'field-validation-error', _1: model.errorOnEmail}
+								]))
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text('проверьте указанный email')
+						]))
+				]))
+		]);
+};
+var _user$project$View_Adv$sumView = function (model) {
+	return _elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('editor-label')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$label,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$for('Sum')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text('сумма к оплате')
+						])),
+					_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
+					_elm_lang$html$Html$text('(*)')
+				])),
+			A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('editor-field')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$input,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$type$('text'),
+							_elm_lang$html$Html_Attributes$classList(
+							_elm_lang$core$Native_List.fromArray(
+								[
+									{ctor: '_Tuple2', _0: 'text-box', _1: true},
+									{ctor: '_Tuple2', _0: 'input-validation-error', _1: model.errorOnSum}
+								])),
+							_elm_lang$html$Html_Attributes$placeholder('укажите сумму к оплате'),
+							_elm_lang$html$Html_Attributes$name('Sum'),
+							_elm_lang$html$Html_Attributes$value(model.sum),
+							_elm_lang$html$Html_Events$onInput(_user$project$Type$ChangeSum)
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[])),
+					_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
+					_elm_lang$html$Html$text('руб.'),
+					A2(
+					_elm_lang$html$Html$br,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[])),
+					A2(
+					_elm_lang$html$Html$span,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$classList(
+							_elm_lang$core$Native_List.fromArray(
+								[
+									{
+									ctor: '_Tuple2',
+									_0: 'field-validation-valid',
+									_1: _elm_lang$core$Basics$not(model.errorOnSum)
+								},
+									{ctor: '_Tuple2', _0: 'field-validation-invalid', _1: model.errorOnSum},
+									{ctor: '_Tuple2', _0: 'field-validation-error', _1: model.errorOnSum}
+								]))
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text('проверьте указанную сумму')
+						]))
+				]))
+		]);
+};
+var _user$project$View_Adv$targetView = function (model) {
+	return _elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('editor-label')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$label,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$for('Title')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text('назначение платежа')
+						])),
+					_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
+					_elm_lang$html$Html$text('(*)')
+				])),
+			A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('editor-field')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$input,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$type$('text'),
+							_elm_lang$html$Html_Attributes$classList(
+							_elm_lang$core$Native_List.fromArray(
+								[
+									{ctor: '_Tuple2', _0: 'text-box-long', _1: true},
+									{ctor: '_Tuple2', _0: 'input-validation-error', _1: model.errorOnTarget}
+								])),
+							_elm_lang$html$Html_Attributes$placeholder('укажите назначение платежа'),
+							_elm_lang$html$Html_Attributes$name('Title'),
+							_elm_lang$html$Html_Attributes$value(model.target),
+							_elm_lang$html$Html_Events$onInput(_user$project$Type$ChangeTarget)
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[])),
+					A2(
+					_elm_lang$html$Html$br,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[])),
+					A2(
+					_elm_lang$html$Html$span,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$classList(
+							_elm_lang$core$Native_List.fromArray(
+								[
+									{
+									ctor: '_Tuple2',
+									_0: 'field-validation-valid',
+									_1: _elm_lang$core$Basics$not(model.errorOnTarget)
+								},
+									{ctor: '_Tuple2', _0: 'field-validation-invalid', _1: model.errorOnTarget},
+									{ctor: '_Tuple2', _0: 'field-validation-error', _1: model.errorOnTarget}
+								]))
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text('укажите назначение платежа')
+						]))
+				]))
+		]);
+};
+var _user$project$View_Adv$invoiceSentView = function (model) {
+	var message = _elm_lang$core$Native_Utils.eq(
+		model.invoiceSent,
+		_elm_lang$core$Maybe$Just(true)) ? 'счёт на оплату отослан' : 'счёт на оплату не удалось отправить';
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('display-field')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text(message)
+			]));
+};
+var _user$project$View_Adv$invoiceReadyView = function (model) {
+	var nodes = A2(
+		_elm_lang$core$List$append,
+		_user$project$View_Adv$targetView(model),
+		A2(
+			_elm_lang$core$List$append,
+			_user$project$View_Adv$sumView(model),
+			_user$project$View_Adv$emailView(model)));
+	return A2(
+		_elm_lang$html$Html$form,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Events$onSubmit(_user$project$Type$SendInit)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$fieldset,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				A2(
+					_elm_lang$core$List$append,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(
+							_elm_lang$html$Html$legend,
+							_elm_lang$core$Native_List.fromArray(
+								[]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html$text('Отправить счёт на оплату по почте')
+								]))
+						]),
+					nodes)),
+				A2(
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$input,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$type$('submit'),
+								_elm_lang$html$Html_Attributes$class('button'),
+								_elm_lang$html$Html_Attributes$value('отправить')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[])),
+						_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
+						_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
+						_elm_lang$html$Html$text(_krisajenkins$elm_exts$Exts_Html$nbsp),
+						A2(
+						_elm_lang$html$Html$input,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$type$('button'),
+								_elm_lang$html$Html_Attributes$class(' button'),
+								_elm_lang$html$Html_Attributes$value('отмена'),
+								A2(_elm_lang$html$Html_Attributes$attribute, 'onclick', 'window.history.back();')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[]))
+					]))
+			]));
+};
+var _user$project$View_Adv$advView = function (model) {
+	return _elm_lang$core$Native_Utils.eq(model.invoiceSent, _elm_lang$core$Maybe$Nothing) ? _user$project$View_Adv$invoiceReadyView(model) : _user$project$View_Adv$invoiceSentView(model);
+};
+
+var _user$project$View_Baza$invoiceSentView = function (model) {
+	var message = _elm_lang$core$Native_Utils.eq(
+		model.invoiceSent,
+		_elm_lang$core$Maybe$Just(true)) ? 'счёт на оплату отослан' : 'счёт на оплату не удалось отправить';
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text(message)
+			]));
+};
+var _user$project$View_Baza$invoiceReadyView = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[]));
+};
+var _user$project$View_Baza$bazaView = function (model) {
+	return _elm_lang$core$Native_Utils.eq(model.invoiceSent, _elm_lang$core$Maybe$Nothing) ? _user$project$View_Baza$invoiceReadyView(model) : _user$project$View_Baza$invoiceSentView(model);
+};
+
 var _user$project$View$view = function (model) {
 	var _p0 = model.render;
 	if (_p0.ctor === 'Adv') {
-		return _user$project$AdvView$advView(model);
+		return _user$project$View_Adv$advView(model);
 	} else {
-		return _user$project$BazaView$bazaView(model);
+		return _user$project$View_Baza$bazaView(model);
 	}
 };
 
@@ -9747,7 +9775,17 @@ var _user$project$SendInvoiceLetterForm$subscriptions = function (model) {
 var _user$project$SendInvoiceLetterForm$init = function (flags) {
 	var render = _elm_lang$core$Native_Utils.eq(flags.render, 'adv') ? _user$project$Type$Adv : _user$project$Type$Baza;
 	var model = _user$project$Type$Model(flags.id)(flags.target)(flags.sum)(flags.email)(render)(flags.sendUrl)(flags.successUrl)(false)(false)(false)(_elm_lang$core$Maybe$Nothing);
-	return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+	return {
+		ctor: '_Tuple2',
+		_0: model,
+		_1: _elm_lang$core$Platform_Cmd$batch(
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_shmookey$cmd_extra$Cmd_Extra$message(_user$project$Type$ValidateTarget),
+					_shmookey$cmd_extra$Cmd_Extra$message(_user$project$Type$ValidateSum),
+					_shmookey$cmd_extra$Cmd_Extra$message(_user$project$Type$ValidateEmail)
+				]))
+	};
 };
 var _user$project$SendInvoiceLetterForm$main = {
 	main: _elm_lang$html$Html_App$programWithFlags(

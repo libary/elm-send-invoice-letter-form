@@ -1,4 +1,4 @@
-module BazaView exposing (bazaView)
+module View.Baza exposing (bazaView)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)

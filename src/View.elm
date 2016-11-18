@@ -2,8 +2,8 @@ module View exposing (..)
 
 import Html exposing (..)
 
-import AdvView exposing (..)
-import BazaView exposing (..)
+import View.Adv exposing (..)
+import View.Baza exposing (..)
 import Type exposing (..)
 
 view : Model -> Html Msg

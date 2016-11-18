@@ -1,4 +1,4 @@
-module AdvView exposing (advView)
+module View.Adv exposing (advView)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -7,6 +7,7 @@ import Exts.Html exposing (..)
 import List exposing (append)
 
 import Type exposing (..)
+-- import Helpers exposing (..)
 
 advView : Model -> Html Msg
 advView model =
@@ -15,47 +16,15 @@ advView model =
             invoiceReadyView model
         else
             invoiceSentView model
-    -- <form>
-    --     <fieldset>
-    --         <legend>Отправить счёт на оплату по почте</legend>
-    --         <div class="editor-label">
-    --             <label for="Title">назначение платежа</label> (*)
-    --         </div>
-    --         <div class="editor-field">
-    --             <input class="text-box-long" data-val="true" data-val-required="укажите назначение платежа" id="Title" name="Title" type="text" value="model.target">
-    --             <br />
-    --             <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true"></span>
-    --         </div>
-    --         <div class="editor-label">
-    --             <label for="Sum">сумма к оплате</label> (*)
-    --         </div>
-    --         <div class="editor-field">
-    --             <input class="text-box" data-val="true" data-val-regex="проверьте указанную сумму" data-val-regex-pattern="^(\d{1,}(\,\d{1,2})?)$" data-val-required="укажите сумму" id="Sum" name="Sum" type="text" value="model.sum">&nbsp;руб.
-    --             <br />
-    --             <span class="field-validation-valid" data-valmsg-for="Sum" data-valmsg-replace="true"></span>
-    --         </div>
-    --         <div class="editor-label">
-    --             <label for="Email">email</label> (*)
-    --         </div>
-    --         <div class="editor-field">
-    --             <input data-val="true" data-val-length="длина email не должна превышать 30 знаков" data-val-length-max="30" data-val-regex="проверьте указанный e-mail" data-val-regex-pattern="^([\w\-\.]+)@((\[([0-9]{1,3}\.){3}[0-9]{1,3}\])|(([\w\-]+\.)+)([a-zA-Z]{2,4}))$" data-val-required="укажите email клиента" id="Email" name="Email" type="text" value="model.email">
-    --             <br />
-    --             <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
-    --         </div>
-    --     </fieldset>
-    --     <p>
-    --         <input type="submit" value="отправить" class="button">&nbsp;&nbsp;&nbsp;<input type="button" value="отмена" class="button" onclick="javascript:window.history.back();">
-    --     </p>
-    -- </form>
 
 invoiceReadyView : Model -> Html Msg
 invoiceReadyView model =
     let
         nodes : List (Html Msg)
         nodes =
-            (advEmailView model)
-            |> append (advSumView model)
-            |> append (advTargetView model)
+            (emailView model)
+            |> append (sumView model)
+            |> append (targetView model)
     in
         Html.form [ onSubmit SendInit ]
             [ fieldset []
@@ -67,6 +36,8 @@ invoiceReadyView model =
                 , text nbsp
                 , input [ type' "button", class " button", value "отмена", attribute "onclick" "window.history.back();" ] []
                 ]
+            -- , p [] [ text (toString model) ]
+            -- , p [] [ text (toString (validate model)) ]
             ]
 
 invoiceSentView : Model -> Html Msg
@@ -78,10 +49,10 @@ invoiceSentView model =
                 then "счёт на оплату отослан"
                 else "счёт на оплату не удалось отправить"
     in
-        div [] [ text message ]
+        div [ class "display-field" ] [ text message ]
 
-advTargetView : Model -> List (Html Msg)
-advTargetView model =
+targetView : Model -> List (Html Msg)
+targetView model =
     [ div [ class "editor-label" ]
         [ label [for "Title"] [ text "назначение платежа" ]
         , text nbsp
@@ -90,23 +61,28 @@ advTargetView model =
     , div [ class "editor-field" ]
         [ input
             [ type' "text"
-            , class "text-box-long"
+            , classList
+                [ ("text-box-long", True)
+                , ("input-validation-error", model.errorOnTarget)
+                ]
             , placeholder "укажите назначение платежа"
             , name "Title"
             , value model.target
+            , onInput ChangeTarget
             ] []
         , br [] []
         , span [ classList
-                    [ ("field-validation-valid", not model.errorOnEmail)
-                    , ("field-validation-invalid", model.errorOnEmail)
+                    [ ("field-validation-valid", not model.errorOnTarget)
+                    , ("field-validation-invalid", model.errorOnTarget)
+                    , ("field-validation-error", model.errorOnTarget)
                     ]
                 ]
                 [ text "укажите назначение платежа" ]
         ]
     ]
 
-advSumView : Model -> List (Html Msg)
-advSumView model =
+sumView : Model -> List (Html Msg)
+sumView model =
     [ div [ class "editor-label" ]
         [ label [ for "Sum" ] [ text "сумма к оплате" ]
         , text nbsp
@@ -115,10 +91,14 @@ advSumView model =
     , div [ class "editor-field" ]
         [ input
             [ type' "text"
-            , class "text-box"
+            , classList
+                [ ("text-box", True)
+                , ("input-validation-error", model.errorOnSum)
+                ]
             , placeholder "укажите сумму к оплате"
             , name "Sum"
             , value model.sum
+            , onInput ChangeSum
             ] []
         , text nbsp
         , text "руб."
@@ -126,14 +106,15 @@ advSumView model =
         , span [ classList
                     [ ("field-validation-valid", not model.errorOnSum)
                     , ("field-validation-invalid", model.errorOnSum)
+                    , ("field-validation-error", model.errorOnSum)
                     ]
                 ]
                 [ text "проверьте указанную сумму" ]
         ]
     ]
 
-advEmailView : Model -> List (Html Msg)
-advEmailView model =
+emailView : Model -> List (Html Msg)
+emailView model =
     [ div [ class "editor-label" ]
         [ label [ for "Email" ] [ text "email" ]
         , text nbsp
@@ -142,15 +123,20 @@ advEmailView model =
     , div [ class "editor-field" ]
         [ input
             [ type' "email"
-            , class "text-box"
+            , classList
+                [ ("text-box", True)
+                , ("input-validation-error", model.errorOnEmail)
+                ]
             , placeholder "укажите email"
             , name "Email"
             , value model.email
+            , onInput ChangeEmail
             ] []
         , br [] []
         , span [ classList
                     [ ("field-validation-valid", not model.errorOnEmail)
                     , ("field-validation-invalid", model.errorOnEmail)
+                    , ("field-validation-error", model.errorOnEmail)
                     ]
                 ]
                 [ text "проверьте указанный email" ]
