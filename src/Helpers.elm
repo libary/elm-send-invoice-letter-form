@@ -6,7 +6,6 @@ import Task
 import Http exposing (multipart,stringData)
 import Json.Decode as Json
 import String
-import Result
 
 sendInvoice : Model -> Cmd Msg
 sendInvoice model =
