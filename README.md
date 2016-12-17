@@ -1,10 +1,12 @@
 # elm-send-invoice-letter-form
+
 Form to send invoice letter
 
-for ELM 0.17.1
+elm v0.18
 
-собрать:
+make:
 elm make src/Main.elm --output=dst/form.js
+gulp
 
 demo:
-/demo/index.html
+https://libary.github.io/elm-send-invoice-letter-form/demo/index.html

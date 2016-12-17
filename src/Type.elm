@@ -1,6 +1,7 @@
 module Type exposing (..)
 
-import Http
+import Http exposing (Error)
+
 
 type alias Flags =
     { id : String
@@ -9,11 +10,14 @@ type alias Flags =
     , email : String
     , render : String
     , sendUrl : String
-    , successUrl : String }
+    , successUrl : String
+    }
+
 
 type Render
     = Adv
     | Baza
+
 
 type alias Model =
     { id : String
@@ -27,7 +31,8 @@ type alias Model =
     , errorOnSum : Bool
     , errorOnEmail : Bool
     , invoiceSent : Maybe Bool
-}
+    }
+
 
 type Msg
     = NoOp
@@ -38,5 +43,4 @@ type Msg
     | ValidateSum
     | ValidateTarget
     | SendInit
-    | SendSucceed Bool
-    | SendFail Http.Error
+    | SendResult (Result Error Bool)

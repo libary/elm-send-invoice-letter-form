@@ -1,40 +1,38 @@
-module Update exposing(..)
-
-import Cmd.Extra exposing (message)
+module Update exposing (..)
 
 import Type exposing (..)
 import Helpers exposing (..)
 
-update : Msg -> Model -> (Model, Cmd Msg)
+
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         NoOp ->
-            (model, Cmd.none)
+            model ! []
 
         ChangeTarget newTarget ->
-            ({model | target = newTarget}, message ValidateTarget)
+            ( { model | target = newTarget }, message ValidateTarget )
 
-        ChangeSum newSum->
-            ({model | sum = newSum}, message ValidateSum)
+        ChangeSum newSum ->
+            ( { model | sum = newSum }, message ValidateSum )
 
         ChangeEmail newEmail ->
-            ({model | email = newEmail}, message ValidateEmail)
+            ( { model | email = newEmail }, message ValidateEmail )
 
         ValidateTarget ->
-            ({model | errorOnTarget = not (validateTarget model)}, Cmd.none)
+            { model | errorOnTarget = not (validateTarget model) } ! []
 
         ValidateSum ->
-            ({model | errorOnSum = not (validateSum model)}, Cmd.none)
+            { model | errorOnSum = not (validateSum model) } ! []
 
         ValidateEmail ->
-            ({model | errorOnEmail = not (validateEmail model)}, Cmd.none)
+            { model | errorOnEmail = not (validateEmail model) } ! []
 
         SendInit ->
-            (model, sendInvoice model)
-            -- ({model | invoiceSent = Just True }, Cmd.none)
+            ( model, sendInvoice model )
 
-        SendSucceed result ->
-            ({model | invoiceSent = Just result }, Cmd.none)
+        SendResult (Ok result) ->
+            { model | invoiceSent = Just result } ! []
 
-        SendFail error ->
-            ({model | invoiceSent = Just False }, Cmd.none)
+        SendResult (Err _) ->
+            model ! []

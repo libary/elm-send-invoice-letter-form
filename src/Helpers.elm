@@ -1,55 +1,65 @@
 module Helpers exposing (..)
 
 import Type exposing (..)
-
 import Task
-import Http exposing (multipart,stringData)
+import Http exposing (..)
 import Json.Decode as Json
 import String
+
 
 sendInvoice : Model -> Cmd Msg
 sendInvoice model =
     let
         url : String
-        url = model.sendUrl
+        url =
+            model.sendUrl
 
-        body : Http.Body
+        body : Body
         body =
-            multipart
-                [ stringData "id" model.id
-                , stringData "target" model.target
-                , stringData "sum" model.sum
-                , stringData "email" model.email
-                , stringData "successUrl" model.successUrl
+            multipartBody
+                [ stringPart "id" model.id
+                , stringPart "target" model.target
+                , stringPart "sum" model.sum
+                , stringPart "email" model.email
+                , stringPart "successUrl" model.successUrl
                 ]
     in
         if (validate model) == True then
-            Task.perform SendFail SendSucceed (Http.post decodeResult url body)
+            Http.send SendResult (Http.post url body decodeResult)
         else
             Cmd.none
+
 
 decodeResult : Json.Decoder Bool
 decodeResult =
     let
         resultField : String
-        resultField = "result"
+        resultField =
+            "result"
     in
-        Json.at [resultField] Json.bool
+        Json.at [ resultField ] Json.bool
+
 
 validateTarget : Model -> Bool
 validateTarget model =
     not (String.isEmpty model.target)
 
+
 validateSum : Model -> Bool
 validateSum model =
-    not (String.isEmpty model.sum)
-    &&
-    Result.toMaybe (String.toFloat model.sum) /= Nothing
+    not (String.isEmpty model.sum) && (Result.toMaybe (String.toFloat model.sum) /= Nothing)
+
 
 validateEmail : Model -> Bool
 validateEmail model =
     not (String.isEmpty model.email)
 
+
 validate : Model -> Bool
 validate model =
     not model.errorOnTarget && not model.errorOnSum && not model.errorOnEmail
+
+
+message : msg -> Cmd msg
+message x =
+    Task.perform identity (Task.succeed x)
